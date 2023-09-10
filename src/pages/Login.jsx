@@ -11,7 +11,7 @@ import styles from "./Login.module.css";
 const Login = () => {
   const [email, setEmail] = useState("mostafa.khodaparast1997@gmail.com");
   const [password, setPassword] = useState("1234");
-  const { login, isAuthenticated } = useAuth();
+  const { login, isAuthenticated, error } = useAuth();
   const navigate = useNavigate();
 
 
@@ -53,6 +53,7 @@ const Login = () => {
 
         <div>
           <Button type="primary">Login</Button>
+          {error ? <p style={{fontSize: '1.4rem'}}>{error}</p> : null}
         </div>
       </form>
     </main>

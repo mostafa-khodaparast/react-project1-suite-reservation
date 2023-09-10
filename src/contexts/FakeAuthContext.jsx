@@ -5,6 +5,7 @@ const AuthContext = createContext();
 const initialState = {
   user: null,
   isAuthenticated: false,
+  error: ''
 };
 
 function reducer(state, action) {
@@ -13,6 +14,8 @@ function reducer(state, action) {
       return { ...state, user: action.payload, isAuthenticated: true };
     case "logout":
       return { ...state, user: null, isAuthenticated: false };
+    case "error":
+      return { ...state, isAuthenticated: false, error: action.payload }
     default:
       throw new Error("Unknown action");
   }
@@ -27,11 +30,14 @@ const FAKE_USER = {
 
 
 const AuthProvider = ({ children }) => {
-  const [{ user, isAuthenticated }, dispatch] = useReducer(reducer, initialState);
+  const [{ user, isAuthenticated, error }, dispatch] = useReducer(reducer, initialState);
 
   function login(email, password) {
     if (email === FAKE_USER.email && password === FAKE_USER.password)
       dispatch({ type: "login", payload: FAKE_USER });
+    else
+      dispatch({type: "error", payload: "It's a fake Auth.Please do not change email & password dude 😉"})
+
   }
 
   function logout() {
@@ -39,7 +45,7 @@ const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, error, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
