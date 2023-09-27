@@ -1,20 +1,10 @@
-import styled from "styled-components";
-
-const StyledLogo = styled.div`
-  text-align: center;
-`;
-
-const Img = styled.img`
-  height: 9.6rem;
-  width: auto;
-`;
 
 function Logo() {
   return (
-    <StyledLogo>
-      <Img src="/logo-light.png" alt="Logo" />
-    </StyledLogo>
-  );
+    <div className="flex justify-center mt-4 mb-7">
+      <img src="/logo-light.png" className=" h-28 w-auto" alt="Logo" />
+    </div>
+  )
 }
 
 export default Logo;

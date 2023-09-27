@@ -1,25 +1,46 @@
-import styled from "styled-components";
+import { useQuery } from "@tanstack/react-query"
+import { useSearchParams } from "react-router-dom"
+import { getCabins } from "../../services/apiCabins"
+import Spinner from "../../ui/Spinner"
+import SingleCabin from "./SingleCabin"
 
-const Table = styled.div`
-  border: 1px solid var(--color-grey-200);
 
-  font-size: 1.4rem;
-  background-color: var(--color-grey-0);
-  border-radius: 7px;
-  overflow: hidden;
-`;
+const CabinTable = () => {
 
-const TableHeader = styled.header`
-  display: grid;
-  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
-  column-gap: 2.4rem;
-  align-items: center;
+  const { isLoading, data } = useQuery({
+    queryKey: ['cabins'],
+    queryFn: getCabins
+  })
 
-  background-color: var(--color-grey-50);
-  border-bottom: 1px solid var(--color-grey-100);
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-  font-weight: 600;
-  color: var(--color-grey-600);
-  padding: 1.6rem 2.4rem;
-`;
+  const [searchParams] = useSearchParams()
+
+  //filter
+  const discountFilter = searchParams.get('discount') || 'all'
+  let cabinsWithDiscountFilter
+  if (discountFilter === 'all') cabinsWithDiscountFilter = data
+  if (discountFilter === 'with-discount') cabinsWithDiscountFilter = data.filter(cabin => cabin.discount > 0)
+
+  //sort
+  const sortBy = searchParams.get('sortBy') || ''
+  const [fieldName, direction] = sortBy.split('-')
+  const modifier = direction === 'asc' ? 1 : -1
+  const sortedCabin = cabinsWithDiscountFilter?.sort((a, b) => (a[fieldName] - b[fieldName]) * modifier)
+
+
+  if (isLoading) return <Spinner />
+
+  return (
+    <>
+      <div className="grid grid-cols-6  w-[90%] text-center font-semibold mt-3 mx-auto bg-slate-300 py-2">
+        <div>NAME</div>
+        <div>CAPACITY</div>
+        <div>PRICE</div>
+        <div>DISCOUNT</div>
+        <div className="col-span-2"></div>
+      </div>
+      {sortedCabin.map(cabin => <SingleCabin cabin={cabin} key={cabin.id} />)}
+    </>
+  )
+}
+
+export default CabinTable
