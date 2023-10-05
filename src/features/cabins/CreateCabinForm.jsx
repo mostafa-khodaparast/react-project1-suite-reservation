@@ -52,7 +52,7 @@ function CreateCabinForm({ editCabinObj = {} }) {
 
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="form-control border w-[80%] mx-auto border-stone-100 my-4 p-4 flex flex-col space-y-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="form-control bg-slate-400 border w-[80%] mx-auto border-stone-100 my-4 p-4 flex flex-col space-y-4">
       <input
         type="text"
         id="name"
@@ -105,18 +105,6 @@ function CreateCabinForm({ editCabinObj = {} }) {
         })}
       />
       {formState.errors?.discount?.message && <p className=" text-sm text-red-600 w-1/2 m-auto">{formState.errors.discount.message}</p>}
-
-      <textarea
-        type="number"
-        id="description"
-        defaultValue=""
-        placeholder="Description for website"
-        className="formInput"
-        {...register('description', {
-          required: 'description is required'
-        })}
-      />
-      {formState.errors?.description?.message && <p className=" text-sm text-red-600 w-1/2 m-auto">{formState.errors.description.message}</p>}
 
 
       <div className="flex space-x-1 items-center justify-center w-1/2 mx-auto">

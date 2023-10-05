@@ -3,36 +3,44 @@ import { getBookings } from "../../services/apiBookings";
 import SingleBook from "./SingleBook";
 import Spinner from "../../ui/Spinner";
 import { useSearchParams } from "react-router-dom";
+import Pagination from "../../ui/Pagination";
+import { data } from "autoprefixer";
 
 
 const BookingTable = () => {
 
-  const { isLoading, data } = useQuery({
-    queryKey: ['booking'],
-    queryFn: getBookings
-  })
-
   const [searchParams] = useSearchParams()
 
+  //use this currentPage for server side pagination
+  const currentPage = searchParams.get('page') ? Number(searchParams.get('page')) : 1
+
+  const {
+    isLoading,
+    data: { data: bookings, count: dataLength } = {}  // {} is a default value in first fetching
+  } = useQuery({
+    queryKey: ['booking', currentPage],
+    queryFn: () => getBookings(currentPage)
+  })
+
+
+  //filter bookings base on status
   const bookingStatus = searchParams.get('bookingsStatus') || 'all'
-
   let filteredBookings
-
   switch (bookingStatus) {
     case 'unconfirmed':
-      filteredBookings = data.filter(book => book.status === 'unconfirmed')
+      filteredBookings = bookings.filter(book => book.status === 'unconfirmed')
       break;
     case 'check-in':
-      filteredBookings = data.filter(book => book.status === 'check-in')
+      filteredBookings = bookings.filter(book => book.status === 'check-in')
       break;
     case 'check-out':
-      filteredBookings = data.filter(book => book.status === 'check-out')
+      filteredBookings = bookings.filter(book => book.status === 'check-out')
       break;
     default:
-      filteredBookings = data
+      filteredBookings = bookings
   }
 
-  if (data?.length === 0) return <p className="fonst-semibold text-center text-red-500 mt-20">No booking found...</p>
+  if (bookings?.length === 0) return <p className="fonst-semibold text-center text-red-500 mt-20">No booking found...</p>
 
   if (isLoading) return <Spinner />
 
@@ -47,6 +55,7 @@ const BookingTable = () => {
         <div>Amount</div>
       </div>
       {filteredBookings?.map(book => <SingleBook book={book} key={book.id} />)}
+      <Pagination dataLength={dataLength} />
     </>
   );
 }

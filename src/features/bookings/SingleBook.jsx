@@ -1,7 +1,7 @@
 const SingleBook = ({ book }) => {
     
     return (
-        <div className="bg-slate-400 w-[90%] mx-auto my-1 rounded-sm">
+        <div className=" bg-slate-400 w-[90%] mx-auto my-1 rounded-sm">
             <div className="grid grid-cols-[1fr_2fr_1fr_1fr_1fr] w-full mx-auto text-center" key={book.id}>
                 <div className="self-center">{book.cabins.name}</div>
                 <div className="self-center p-2">
