@@ -3,7 +3,7 @@ import { differenceInDays } from 'date-fns/esm';
 
 
 //page size for pagination
-export const  PAGE_SIZE = 2
+export const  PAGE_SIZE = 1
 
 
 // We want to make this function work for both Date objects and strings (which come from Supabase)

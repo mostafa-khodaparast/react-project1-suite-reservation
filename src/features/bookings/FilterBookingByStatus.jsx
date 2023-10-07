@@ -10,8 +10,8 @@ const FilterBookingByStatus = () => {
     }
 
     return (
-        <div className="flex space-x-2">
-            <span>filter by status : </span>
+        <div className="flex items-center space-x-2 ml-14">
+            <span className="font-semibold">filter by status : </span>
             <select onChange={handleSelect} className="bg-blue-500 hover:cursor-pointer focus:outline-none py-1 text-stone-100 px-4 ml-2 border-none  rounded-sm transition-all duration-300">
                 <option value="all">all</option>
                 <option value="unconfirmed">unconfirmed</option>

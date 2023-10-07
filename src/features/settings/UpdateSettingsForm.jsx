@@ -34,7 +34,7 @@ function UpdateSettingsForm() {
   if (isLoading) return <Spinner />
 
   return (
-    <form className="form-control border w-[80%] mx-auto border-stone-100 my-4 p-4 flex flex-col space-y-4">
+    <form className="form-control bg-slate-400 w-[80%] mx-auto my-4 p-4 flex flex-col space-y-4">
       <label htmlFor="min-nights" className="font-semibold"> Minimum nights/booking :</label>
       <input
         type='number'
