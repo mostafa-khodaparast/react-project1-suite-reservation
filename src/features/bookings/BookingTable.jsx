@@ -37,11 +37,11 @@ const BookingTable = () => {
     case 'unconfirmed':
       filteredBookings = bookings.filter(book => book.status === 'unconfirmed')
       break;
-    case 'check-in':
-      filteredBookings = bookings.filter(book => book.status === 'check-in')
+    case 'checked-in':
+      filteredBookings = bookings.filter(book => book.status === 'checked-in')
       break;
-    case 'check-out':
-      filteredBookings = bookings.filter(book => book.status === 'check-out')
+    case 'checked-out':
+      filteredBookings = bookings.filter(book => book.status === 'checked-out')
       break;
     default:
       filteredBookings = bookings

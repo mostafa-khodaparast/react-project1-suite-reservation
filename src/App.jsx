@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast"
 import Dashboard from "./pages/Dashboard"
 import Account from "./pages/Account"
 import Bookings from "./pages/Bookings"
+import BookingDetail from "./features/bookings/BookingDetail"
 import Cabins from "./pages/Cabins"
 import Login from "./pages/Login"
 import Settings from "./pages/Settings"
@@ -33,6 +34,7 @@ const App = () => {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="account" element={<Account />} />
             <Route path="bookings" element={<Bookings />} />
+            <Route path="bookings/:bookingId" element={<BookingDetail />} />
             <Route path="cabins" element={<Cabins />} />
             <Route path="settings" element={<Settings />} />
             <Route path="users" element={<Users />} />

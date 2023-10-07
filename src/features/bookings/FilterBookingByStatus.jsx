@@ -15,8 +15,8 @@ const FilterBookingByStatus = () => {
             <select onChange={handleSelect} className="bg-blue-500 hover:cursor-pointer focus:outline-none py-1 text-stone-100 px-4 ml-2 border-none  rounded-sm transition-all duration-300">
                 <option value="all">all</option>
                 <option value="unconfirmed">unconfirmed</option>
-                <option value="check-out">check-out</option>
-                <option value="check-in">check-in</option>
+                <option value="checked-out">checked-out</option>
+                <option value="checked-in">checked-in</option>
             </select>
         </div>
     )

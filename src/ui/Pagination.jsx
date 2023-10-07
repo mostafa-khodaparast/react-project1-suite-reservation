@@ -42,14 +42,14 @@ const Pagination = ({ dataLength }) => {
         <button
           onClick={prevPage}
           disabled={currentPage === 1}
-          className="bg-blue-500 px-3 py-2 mx-2 rounded-sm hover:bg-blue-700 transition-all duration-300 text-stone-100 flex items-center">
+          className="bg-blue-500 px-3 py-2 mx-2 disabled:bg-gray-500 disabled:cursor-not-allowed rounded-sm hover:bg-blue-700 transition-all duration-300 text-stone-100 flex items-center">
           <HiChevronLeft />
           <span>Previous</span>
         </button>
         <button
           onClick={nextPage}
           disabled={currentPage === pageNumbers}
-          className="bg-blue-500 px-3 py-2 mx-2 rounded-sm hover:bg-blue-700 transition-all duration-300 text-stone-100 flex items-center">
+          className="bg-blue-500 px-3 py-2 mx-2 rounded-sm disabled:bg-gray-500 disabled:cursor-not-allowed hover:bg-blue-700 transition-all duration-300 text-stone-100 flex items-center">
           <span>Next</span>
           <HiChevronRight />
         </button>
