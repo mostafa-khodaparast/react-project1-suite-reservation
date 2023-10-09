@@ -1,11 +1,14 @@
+import {
+  HiOutlineChatBubbleBottomCenterText, HiOutlineCheckCircle,
+  HiOutlineCurrencyDollar, HiOutlineHomeModern
+} from "react-icons/hi2"
 import { useNavigate, useParams, } from "react-router-dom"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import Spinner from "../../ui/Spinner"
-import { getBooking, updateBooking } from "../../services/apiBookings"
-import { HiOutlineChatBubbleBottomCenterText, HiOutlineCheckCircle, HiOutlineCurrencyDollar, HiOutlineHomeModern } from "react-icons/hi2"
-import { format, isToday } from "date-fns"
-import { formatCurrency, formatDistanceFromNow } from "../../utils/helpers"
 import { toast } from "react-hot-toast"
+import { format, isToday } from "date-fns"
+import Spinner from "../../ui/Spinner"
+import { getBooking, updateBooking, deleteBooking } from "../../services/apiBookings"
+import { formatCurrency, formatDistanceFromNow } from "../../utils/helpers"
 
 
 const BookingDetail = () => {
@@ -14,27 +17,49 @@ const BookingDetail = () => {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
 
-  const { isLoading, data = {} } = useQuery({           //{} is default value for initial fetching data
+  const { isLoading, data = {} } = useQuery({       //{} is default value for initial fetching data
     queryKey: ['booking'],
     queryFn: () => getBooking(bookingId)
   })
 
-  const { mutate } = useMutation({
+  const { mutate: checkIn } = useMutation({
     mutationFn: (bookingId) =>
       updateBooking(bookingId, {
-        status: "checked-in",
+        status: "ورود",
         isPaid: true,
       }),
-    onSuccess: () => {               //we access to data that return by mutationFn
-      //toast.success(`Booking #${data.id} successfully checked in`);
-      toast.success(`Booking # successfully checked in`);
+    onSuccess: (data) => {               //we access to data that return by mutationFn
+      toast.success(`رزرو باموفقیت ثبت شد`);
       queryClient.invalidateQueries({
         queryKey: ['booking']
       });
     },
-    onError: () => toast.error("There was an error while checking in"),
+    onError: () => toast.error("ثبت باخطا مواجه شد"),
   });
 
+  const { mutate: checkOut } = useMutation({
+    mutationFn: (bookingId) => updateBooking(bookingId, { status: "خروج" }),
+    onSuccess: (data) => {
+      toast.success(`خروج باموفقیت ثبت شد`);
+      queryClient.invalidateQueries({
+        queryKey: ['booking']
+      });
+      navigate('/bookings')
+    },
+    onError: () => toast.error("خروج باخطا مواجه شد"),
+  });
+
+  const { mutate: handleDelete } = useMutation({
+    mutationFn: deleteBooking,
+    onSuccess: () => {
+      toast.success('رزرو باموفقیت حذف شد')
+      queryClient.invalidateQueries({                //update UI
+        queryKey: ['booking']
+      })
+      navigate('/bookings')
+    },
+    onError: (err) => toast.error(err.message)
+  })
 
   const {
     created_at,
@@ -42,14 +67,12 @@ const BookingDetail = () => {
     endDate,
     numNights,
     numGuests,
-    cabinPrice,
-    extrasPrice,
     totalPrice,
     hasBreakfast,
     observations,
     isPaid,
     status,
-    guests: { fullName: guestName, email, country, nationalID } = {}, // {} default value
+    guests: { fullName: guestName, email, nationalID } = {}, // {} default value
     cabins: { name: cabinName } = {}, // default value
   } = data
 
@@ -57,61 +80,99 @@ const BookingDetail = () => {
   if (isLoading) return <Spinner />
 
   return (
-    <div className="w-[95%] mx-auto">
+    <div dir="rtl" className="w-[95%] mx-auto">
+
       <div className="flex items-center justify-between font-semibold">
         <div className="flex items-center space-x-5">
-          <span className=" font-bold">Booking # {bookingId}</span>
-          <span className={`${isPaid ? 'text-green-500' : 'text-blue-400'} font-bold italic`}>{status}</span>
+          <span className=" font-bold ml-2">رزرو شماره : {bookingId}</span>
+          <span
+            className={`${isPaid ?
+              status === 'ورود' ? 'text-green-600 bg-green-300' : 'text-orange-600 bg-orange-300'
+              : 'text-blue-600 bg-blue-300'} font-bold italic p-2 rounded-3xl`}
+          > وضعیت:
+            {status}
+          </span>
         </div>
-        <button onClick={() => navigate(-1)} className="text-blue-600 hover:text-blue-800">&larr; Back</button>
+        <button onClick={() => navigate(-1)} className="text-blue-600 hover:text-blue-800 font-beyekan"> برگرد &larr;</button>
       </div>
+
       <header className="flex items-center justify-between bg-blue-500 rounded-sm text-stone-200 font-semibold px-8 py-4 my-4">
-        <div className="flex space-x-2 items-center text-lg">
+        <div className="flex space-x-2 items-center text-lg text-blue-900">
           <HiOutlineHomeModern />
-          <p>{numNights} nights in Cabin <span>{cabinName}</span></p>
+          <p className=" font-beyekan pr-2">{numNights} شب اقامت در سوئیت شماره : {cabinName}</p>
         </div>
-        <p>
-          {format(new Date(startDate), "EEE, MMM dd yyyy")} (
-          {isToday(new Date(startDate))
-            ? "Today"
-            : formatDistanceFromNow(startDate)}
-          ) &mdash; {format(new Date(endDate), "EEE, MMM dd yyyy")}
-        </p>
+        {/* <p>
+          {format(new Date(startDate), "EEE, MMM dd yyyy")}
+          {isToday(new Date(startDate)) ? "Today" : formatDistanceFromNow(startDate)}
+          &mdash; {format(new Date(endDate), "EEE, MMM dd yyyy")}
+        </p> */}
       </header>
+
       <div className="flex space-x-3 text-stone-400">
-        <p className="text-stone-800 font-semibold">
-          {guestName} {numGuests > 1 ? `+ ${numGuests - 1} guests` : ""}
+        <p className="text-stone-800 font-semibold pl-3 font-bezar">
+          {guestName} {numGuests > 1 ? `همراه با ${numGuests - 1} مهمان` : ""}
         </p>
         <span>&bull;</span>
-        <p>{email}</p>
+        <p className=" font-bezar">ایمیل: {email}</p>
         <span>&bull;</span>
-        <p>National ID: {nationalID}</p>
+        <p className=" font-bezar">کدملی: {nationalID}</p>
       </div>
-      {observations && (
-        <div className="flex space-x-2 my-5 items-center">
+
+      {observations &&
+        (<div className="flex space-x-2 my-5 items-center">
           <HiOutlineChatBubbleBottomCenterText />
-          <span className="text-stone-800 font-semibold pl-2">Observations: </span>
-          <p className="text-stone-400">{observations}</p>
-        </div>
-      )}
-      <p className="text-stone-800 font-semibold flex items-center"><HiOutlineCheckCircle />
-        <span className="pl-2">Breakfast Included?</span>
-        <span className="text-stone-400 pl-2">{hasBreakfast ? "Yes" : "No"}</span>
+          <span className="text-stone-800 font-beyekan font-semibold px-2">مشاهدات: </span>
+          <p className="text-stone-400 font-bezar text-lg">{observations}</p>
+        </div>)
+      }
+
+      <p className="text-stone-800 font-semibold flex items-center">
+        <HiOutlineCheckCircle />
+        <span className="px-2 font-beyekan">شامل صبحانه :</span>
+        <span className="text-stone-400 font-bezar pl-2">{hasBreakfast ? "بله" : "خیر"}</span>
       </p>
-      <div className={`flex items-center justify-between font-semibold my-2 ${isPaid ? 'bg-green-400 text-green-800' : 'bg-blue-500'}  text-stone-200 rounded-sm px-8 py-4 space-x-5 font-semibold`}>
+
+      <div className={`flex items-center justify-between font-semibold my-2 ${isPaid ? 'bg-green-400 text-green-800' : 'bg-blue-500'}  rounded-sm px-8 py-4 space-x-5 font-semibold`}>
         <div className="flex items-center">
-          <HiOutlineCurrencyDollar /> <span className="px-2">Total price: </span>
-          {formatCurrency(totalPrice)}
-          {/* {hasBreakfast && ` (${formatCurrency(cabinPrice)} cabin + ${extrasPrice} breakfast)`} */}
+          <HiOutlineCurrencyDollar />
+          <span className="px-2 font-beyekan">مبلغ نهایی: </span>
+          {totalPrice} هزار تومان
         </div>
-        <p>{isPaid ? "Paid" : "Not paid"}</p>
+        <p className=" font-beyekan">{isPaid ? "پرداخت شده" : "پرداخت نشده"}</p>
       </div>
-      <p className="text-stone-400 text-sm italic text-right">Booked {format(new Date(created_at), "EEE, MMM dd yyyy, p")}</p>
+
+      {/* <p className="text-stone-400 text-sm italic text-right">Booked
+        {format(new Date(created_at), "EEE, MMM dd yyyy, p")}
+      </p> */}
+
       <div className=" w-1/2 mx-auto">
-        <button 
-        onClick={() => mutate(bookingId)} 
-        disabled={isPaid}
-        className="w-full hover:bg-blue-700 disabled:bg-gray-500 disabled:cursor-not-allowed bg-blue-500 font-semibold hover:text-stone-300 text-stone-100 py-4 px-4 rounded-sm transition-all duration-300">Check-in</button>
+        {status === 'نامشخص' &&
+          <button
+            onClick={() => checkIn(bookingId)}
+            disabled={isPaid}
+            className="w-full hover:bg-blue-700 disabled:bg-gray-500 disabled:cursor-not-allowed bg-blue-500 font-semibold hover:text-stone-300 text-stone-100 py-4 px-4 mt-4 rounded-sm transition-all duration-300"
+          >
+            پرداخت
+          </button>
+        }
+
+        {status === 'ورود' &&
+          <button
+            onClick={() => checkOut(bookingId)}
+            disabled={status === 'checked-out'}
+            className="w-full hover:bg-orange-400 cursor-pointer bg-orange-500 font-semibold hover:text-orange-700 text-orange-100 py-4 px-4 mt-2 rounded-sm transition-all duration-300"
+          >
+            check-out
+          </button>
+        }
+        {status !== 'ورود' &&
+          <button
+            onClick={() => handleDelete(bookingId)}
+            className="w-full hover:bg-red-400 cursor-pointer bg-red-500 font-semibold hover:text-red-700 text-red-100 py-4 px-4 mt-2 rounded-sm transition-all duration-300"
+          >
+            حذف رزرو
+          </button>
+        }
       </div>
     </div>
   )

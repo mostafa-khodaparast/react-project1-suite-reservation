@@ -12,7 +12,9 @@ import Login from "./pages/Login"
 import Settings from "./pages/Settings"
 import Users from "./pages/Users"
 import PageNotFound from "./pages/PageNotFound"
+import SignupForm from "./pages/SignupForm"
 import AppLayout from "./ui/AppLayout"
+import ProtectedRoute from "./ui/ProjectedRoute"
 
 
 const queryClient = new QueryClient({
@@ -29,7 +31,7 @@ const App = () => {
       <ReactQueryDevtools />
       <BrowserRouter>
         <Routes>
-          <Route element={<AppLayout />}>
+          <Route element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
             <Route index element={<Navigate to='dashboard' replace />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="account" element={<Account />} />
@@ -39,11 +41,12 @@ const App = () => {
             <Route path="settings" element={<Settings />} />
             <Route path="users" element={<Users />} />
           </Route>
+          <Route path="signup" element={<SignupForm />} />
           <Route path="login" element={<Login />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
-      <Toaster position="top-center" />
+      <Toaster position="top-right" />
     </QueryClientProvider>
   )
 }

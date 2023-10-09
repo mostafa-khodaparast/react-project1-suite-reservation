@@ -16,7 +16,7 @@ function UpdateSettingsForm() {
   const { mutate } = useMutation({
     mutationFn: updateSetting,
     onSuccess: () => {
-      toast.success('setting edited successfully')
+      toast.success('تنظیمات باموفقیت ویرایش شد')
       queryClient.invalidateQueries({                //update UI
         queryKey: ['settings']
       })
@@ -34,8 +34,8 @@ function UpdateSettingsForm() {
   if (isLoading) return <Spinner />
 
   return (
-    <form className="form-control bg-slate-400 w-[80%] mx-auto my-4 p-4 flex flex-col space-y-4">
-      <label htmlFor="min-nights" className="font-semibold"> Minimum nights/booking :</label>
+    <form dir="rtl" className="form-control font-beyekan bg-slate-400 w-[80%] mx-auto my-4 p-4 flex flex-col space-y-4">
+      <label htmlFor="min-nights" className="font-semibold"> حداقل مدت اقامت(شب) :</label>
       <input
         type='number'
         id='min-nights'
@@ -43,7 +43,7 @@ function UpdateSettingsForm() {
         defaultValue={data?.minBookingLengh}
         onBlur={e => handleUpdate(e, 'minBookingLengh')}
       />
-      <label htmlFor="max-nights" className="font-semibold">Maximum nights/booking :</label>
+      <label htmlFor="max-nights" className="font-semibold">حداکثر مدت اقامت(شب) :</label>
       <input
         type='number'
         id='max-nights'
@@ -51,7 +51,7 @@ function UpdateSettingsForm() {
         defaultValue={data?.maxBookingLengh}
         onBlur={e => handleUpdate(e, 'maxBookingLengh')}
       />
-      <label htmlFor="max-guests" className="font-semibold">Maximum guests/booking :</label>
+      <label htmlFor="max-guests" className="font-semibold">حداکثر تعداد اقامتگر :</label>
       <input
         type='number'
         id='max-guests'
@@ -59,7 +59,7 @@ function UpdateSettingsForm() {
         defaultValue={data?.maxGuestsPerBooking}
         onBlur={e => handleUpdate(e, 'maxGuestsPerBooking')}
       />
-      <label htmlFor="breakfast-price" className="font-semibold">Breakfast price :</label>
+      <label htmlFor="breakfast-price" className="font-semibold">قیمت صبحانه :</label>
       <input
         type='number'
         id='breakfast-price'

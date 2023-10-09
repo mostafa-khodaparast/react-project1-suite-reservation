@@ -5,8 +5,19 @@
 
 @layer components {
     .formInput {
-       @apply  bg-stone-200 focus:outline-none focus:ring focus:ring-stone-200 focus:ring-offset-1 p-3 w-1/2 m-auto rounded-md placeholder:text-lg placeholder:text-stone-500 text-stone-500
+        @apply bg-stone-200 focus:outline-none focus:ring focus:ring-stone-200 focus:ring-offset-1 p-3 w-1/2 m-auto rounded-md placeholder:text-lg placeholder:text-stone-500 text-stone-500
     }
+}
+
+
+@font-face {
+    font-family: BeYekan;
+    src: url("./fonts/XM Yekan.ttf");
+}
+
+@font-face {
+    font-family: BeZar;
+    src: url("./fonts/XW Zar .ttf");
 }
 
 
@@ -14,18 +25,18 @@
 ::-webkit-scrollbar {
     width: 5px;
 }
-  
+
 /* Track */
 ::-webkit-scrollbar-track {
     background: #f1f1f1;
 }
-  
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: #888;
     border-radius: 5px;
 }
-  
+
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #555;

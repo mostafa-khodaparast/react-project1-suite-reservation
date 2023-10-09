@@ -31,17 +31,17 @@ const BookingTable = () => {
 
 
   //filter bookings base on status
-  const bookingStatus = searchParams.get('bookingsStatus') || 'all'
+  const bookingStatus = searchParams.get('bookingsStatus') || 'همه'
   let filteredBookings
   switch (bookingStatus) {
-    case 'unconfirmed':
-      filteredBookings = bookings.filter(book => book.status === 'unconfirmed')
+    case 'نامشخص':
+      filteredBookings = bookings.filter(book => book.status === 'نامشخص')
       break;
-    case 'checked-in':
-      filteredBookings = bookings.filter(book => book.status === 'checked-in')
+    case 'ورود':
+      filteredBookings = bookings.filter(book => book.status === 'ورود')
       break;
-    case 'checked-out':
-      filteredBookings = bookings.filter(book => book.status === 'checked-out')
+    case 'خروج':
+      filteredBookings = bookings.filter(book => book.status === 'خروج')
       break;
     default:
       filteredBookings = bookings
@@ -54,12 +54,12 @@ const BookingTable = () => {
 
   return (
     <>
-      <div className="grid grid-cols-[1fr_2fr_1fr_1fr_1fr] w-[90%] text-center font-semibold mt-3 mx-auto bg-slate-300 py-2">
-        <div>Cabin</div>
-        <div>Guest</div>
-        <div>Nights</div>
-        <div>Status</div>
-        <div>Amount</div>
+      <div dir="rtl" className="grid grid-cols-[1fr_2fr_1fr_1fr_1fr] w-[90%] text-center font-beyekan font-semibold mt-3 mx-auto bg-slate-300 py-2">
+        <div>سوئیت</div>
+        <div>مهمان</div>
+        <div>تعداد شب</div>
+        <div>وضعیت</div>
+        <div>مبلغ</div>
       </div>
       {filteredBookings?.map(book => <SingleBook book={book} key={book.id} />)}
       <Pagination dataLength={dataLength} />

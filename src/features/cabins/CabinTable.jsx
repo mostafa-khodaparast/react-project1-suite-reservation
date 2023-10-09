@@ -15,10 +15,10 @@ const CabinTable = () => {
   const [searchParams] = useSearchParams()
 
   //filter
-  const discountFilter = searchParams.get('discount') || 'all'
+  const discountFilter = searchParams.get('discount') || 'همه'
   let cabinsWithDiscountFilter
-  if (discountFilter === 'all') cabinsWithDiscountFilter = data
-  if (discountFilter === 'with-discount') cabinsWithDiscountFilter = data.filter(cabin => cabin.discount > 0)
+  if (discountFilter === 'همه') cabinsWithDiscountFilter = data
+  if (discountFilter === 'باتخفیف') cabinsWithDiscountFilter = data.filter(cabin => cabin.discount > 0)
 
   //sort
   const sortBy = searchParams.get('sortBy') || ''
@@ -31,11 +31,11 @@ const CabinTable = () => {
 
   return (
     <>
-      <div className="grid grid-cols-6  w-[90%] text-center font-semibold mt-3 mx-auto bg-slate-300 py-2">
-        <div>NAME</div>
-        <div>CAPACITY</div>
-        <div>PRICE</div>
-        <div>DISCOUNT</div>
+      <div className="grid grid-cols-6  w-[90%] font-beyekan text-center font-semibold mt-3 mx-auto bg-slate-300 py-2">
+        <div>شماره سوییت</div>
+        <div>ظرفیت</div>
+        <div>قیمت</div>
+        <div>تخفیف</div>
         <div className="col-span-2"></div>
       </div>
       {sortedCabin.map(cabin => <SingleCabin cabin={cabin} key={cabin.id} />)}

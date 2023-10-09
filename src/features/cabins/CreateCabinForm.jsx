@@ -19,7 +19,7 @@ function CreateCabinForm({ editCabinObj = {} }) {
   const { mutate: createCabin } = useMutation({
     mutationFn: createEditCabins,
     onSuccess: () => {
-      toast.success('cabin created successfully')
+      toast.success('سوییت باموفقیت ساخته شد')
       queryClient.invalidateQueries({                //update UI
         queryKey: ['cabins']
       })
@@ -32,7 +32,7 @@ function CreateCabinForm({ editCabinObj = {} }) {
   const { mutate: editCabin } = useMutation({
     mutationFn: ({ newCabin, id }) => createEditCabins(newCabin, id),
     onSuccess: () => {
-      toast.success('cabin edited successfully')
+      toast.success('سوییت باموفقیت ویرایش شد')
       queryClient.invalidateQueries({                //update UI
         queryKey: ['cabins']
       })
@@ -52,72 +52,73 @@ function CreateCabinForm({ editCabinObj = {} }) {
 
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="form-control bg-slate-400 border w-[80%] mx-auto border-stone-100 my-4 p-4 flex flex-col space-y-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="form-control bg-slate-400 border w-[80%] mx-auto rounded-sm border-stone-100 my-4 p-4 flex flex-col space-y-4">
       <input
         type="text"
         id="name"
-        placeholder="Cabin name"
-        className="formInput"
+        placeholder="نام سوئیت"
+        className="formInput font-beyekan"
         {...register('name', {
-          required: 'cabin name is required'
+          required: 'پُرکردن این فیلد اجباری است'
         })}
       />
-      {formState.errors?.name?.message && <p className=" text-sm text-red-600 w-1/2 m-auto">{formState.errors.name.message}</p>}
+      {formState.errors?.name?.message && <p className=" text-sm text-red-600 font-beyekan font-semibold w-1/2 m-auto">{formState.errors.name.message}</p>}
 
       <input
         type="number"
         id="maxCapacity"
-        placeholder="Maximum capacity"
-        className="formInput"
+        placeholder="ظرفیت"
+        className="formInput font-beyekan"
         {...register('maxCapacity', {
-          required: 'max capacity is required',
+          required: 'پُرکردن این فیلد اجباری است',
           min: {
             value: 1,
-            message: 'max capacity should be at least 1'
+            message: 'حداقل ظرفیت یک نفر است'
           }
         })}
       />
-      {formState.errors?.maxCapacity?.message && <p className=" text-sm text-red-600 w-1/2 m-auto">{formState.errors.maxCapacity.message}</p>}
+      {formState.errors?.maxCapacity?.message && <p className=" text-sm font-beyekan font-semibold text-red-600 w-1/2 m-auto">{formState.errors.maxCapacity.message}</p>}
 
       <input
         type="number"
         id="regularPrice"
-        placeholder="Regular price"
-        className="formInput"
+        placeholder="قیمت"
+        className="formInput font-beyekan"
         {...register('regularPrice', {
-          required: 'regular price is required',
+          required: 'پُرکردن این فیلد اجباری است',
           min: {
             value: 100,
-            message: 'regular price should be at least 100'
+            message: 'حداقل قیمت 100 هزار تومان است'
           }
         })}
       />
-      {formState.errors?.regularPrice?.message && <p className=" text-sm text-red-600 w-1/2 m-auto">{formState.errors.regularPrice.message}</p>}
+      {formState.errors?.regularPrice?.message && <p className=" text-sm font-beyekan font-semibold text-red-600  w-1/2 m-auto">{formState.errors.regularPrice.message}</p>}
 
       <input
         type="number"
         id="discount"
-        placeholder="Discount"
-        className="formInput"
+        defaultValue={0}
+        placeholder="تخفیف"
+        className="formInput font-beyekan"
         {...register('discount', {
-          required: 'discount is required',
-          validate: value => getValues().regularPrice >= value || 'discount should be less than regular price'
+          required: 'پُرکردن این فیلد اجباری است',
+          validate: value => getValues().regularPrice >= value || 'تخفیف باید کمتر از قیمت سوئیت باشد'
         })}
       />
-      {formState.errors?.discount?.message && <p className=" text-sm text-red-600 w-1/2 m-auto">{formState.errors.discount.message}</p>}
+      {formState.errors?.discount?.message && <p className=" text-sm font-beyekan font-semibold text-red-600 w-1/2 m-auto">{formState.errors.discount.message}</p>}
 
 
       <div className="flex space-x-1 items-center justify-center w-1/2 mx-auto">
         <button
           type="reset"
-          className="hover:text-red-700 hover:bg-red-300 bg-red-100 text-red-500 rounded-md py-2 px-3 w-1/2 m-auto transition-all duration-300 focus:outline-none focus:ring focus:ring-red-100 focus:ring-offset-1"
+          className="hover:text-red-700 font-beyekan font-semibold hover:bg-red-300 bg-red-100 text-red-500 rounded-md py-2 px-3 w-1/2 m-auto transition-all duration-300 focus:outline-none focus:ring focus:ring-red-100 focus:ring-offset-1"
         >
-          reset
+          ریست
         </button>
         <button
-          className="hover:text-green-700 hover:bg-green-300 bg-green-100 text-green-500 rounded-md py-2 px-3 w-1/2 m-auto transition-all duration-300 focus:outline-none focus:ring focus:ring-green-100 focus:ring-offset-1"
+          className="hover:text-green-700 font-beyekan font-semibold hover:bg-green-300 bg-green-100 text-green-500 rounded-md py-2 px-3 w-1/2 m-auto transition-all duration-300 focus:outline-none focus:ring focus:ring-green-100 focus:ring-offset-1"
         >
-          {isEditing ? 'edit' : 'Add Cabin'}
+          {isEditing ? 'ثبت ویرایش' : 'افزودن'}
         </button>
       </div>
     </form>

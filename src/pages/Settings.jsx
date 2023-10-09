@@ -4,7 +4,7 @@ import UpdateSettingsForm from "../features/settings/UpdateSettingsForm";
 function Settings() {
   return (
     <>
-      <h1 className="font-bold text-lg">Update hotel settings</h1>
+      <h1 dir="rtl" className=" font-beyekan mr-10 font-bold text-lg">به روز رسانی تنظیمات سوئیت</h1>
       <UpdateSettingsForm />
     </>
   )
