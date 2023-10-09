@@ -84,7 +84,7 @@ const BookingDetail = () => {
 
       <div className="flex items-center justify-between font-semibold">
         <div className="flex items-center space-x-5">
-          <span className=" font-bold ml-2">رزرو شماره : {bookingId}</span>
+          <span className=" font-bold ml-2 dark:text-stone-300">رزرو شماره : {bookingId}</span>
           <span
             className={`${isPaid ?
               status === 'ورود' ? 'text-green-600 bg-green-300' : 'text-orange-600 bg-orange-300'
@@ -109,7 +109,7 @@ const BookingDetail = () => {
       </header>
 
       <div className="flex space-x-3 text-stone-400">
-        <p className="text-stone-800 font-semibold pl-3 font-bezar">
+        <p className="text-stone-400 font-semibold pl-3 font-bezar ">
           {guestName} {numGuests > 1 ? `همراه با ${numGuests - 1} مهمان` : ""}
         </p>
         <span>&bull;</span>
@@ -119,16 +119,16 @@ const BookingDetail = () => {
       </div>
 
       {observations &&
-        (<div className="flex space-x-2 my-5 items-center">
+        (<div className="flex space-x-2 my-5 items-center text-stone-400">
           <HiOutlineChatBubbleBottomCenterText />
-          <span className="text-stone-800 font-beyekan font-semibold px-2">مشاهدات: </span>
+          <span className="text-stone-400 font-beyekan font-semibold px-2">مشاهدات: </span>
           <p className="text-stone-400 font-bezar text-lg">{observations}</p>
         </div>)
       }
 
-      <p className="text-stone-800 font-semibold flex items-center">
+      <p className="text-stone-400 font-semibold flex items-center">
         <HiOutlineCheckCircle />
-        <span className="px-2 font-beyekan">شامل صبحانه :</span>
+        <span className="px-2 font-beyekan ">شامل صبحانه :</span>
         <span className="text-stone-400 font-bezar pl-2">{hasBreakfast ? "بله" : "خیر"}</span>
       </p>
 

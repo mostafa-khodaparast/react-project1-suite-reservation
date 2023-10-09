@@ -24,7 +24,7 @@ const SingleCabin = ({ cabin }) => {
     })
 
     return (
-        <div className=" bg-slate-300 w-[90%] mx-auto my-1 rounded-sm">
+        <div className=" bg-slate-300 w-[90%] text-blue-950 mx-auto my-1 rounded-sm">
             <div className="grid grid-cols-6 w-full mx-auto text-center" key={cabin.id}>
                 <div className="self-center p-2">{cabin.name}</div>
                 <div className="self-center p-2">{cabin.maxCapacity}</div>

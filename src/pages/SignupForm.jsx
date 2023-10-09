@@ -13,10 +13,10 @@ const SignupForm = () => {
   }
 
   return (
-    <div className="mt-10">
+    <div className="dark:bg-[#111827] h-screen">
       <header className="flex flex-col items-center">
-        <img src="/logo-light.png" className="  h-40 bg-none object-cover" />
-        <span className=" text-2xl font-bold text-stone-700 pt-8 font-beyekan ">به صفحه ثبت نام خوش آمدید</span>
+        <img src="/logo-light.png" className="mt-10  h-40 bg-none object-cover" />
+        <span className=" text-2xl font-bold text-stone-700 pt-8 font-beyekan dark:text-stone-300">به صفحه ثبت نام خوش آمدید</span>
       </header>
 
       <form dir="rtl" onSubmit={handleSubmit(onsubmit)} className=" font-beyekan font-semibold w-[80%] mx-auto rounded-sm my-4 p-4 flex flex-col items-start space-y-4">
@@ -26,7 +26,7 @@ const SignupForm = () => {
           className="formInput"
           {...register('fullname', { required: 'پُرکردن این فیلد اجباری است' })}
         />
-        {formState.errors?.fullname?.message && <span className="text-red-600 text-sm pr-72">{formState.errors?.fullname?.message}</span>}
+        {formState.errors?.fullname?.message && <span className="text-red-600 text-sm w-1/2 m-auto">{formState.errors?.fullname?.message}</span>}
 
         <input
           type="text"
@@ -40,7 +40,7 @@ const SignupForm = () => {
             }
           })}
         />
-        {formState.errors?.email?.message && <span className="text-red-600 text-sm pr-72">{formState.errors?.email?.message}</span>}
+        {formState.errors?.email?.message && <span className="text-red-600 text-sm w-1/2 m-auto">{formState.errors?.email?.message}</span>}
 
         <input
           type="password"
@@ -54,7 +54,7 @@ const SignupForm = () => {
             }
           })}
         />
-        {formState.errors?.password?.message && <span className="text-red-600 text-sm pr-72">{formState.errors?.password?.message}</span>}
+        {formState.errors?.password?.message && <span className="text-red-600 text-sm w-1/2 m-auto">{formState.errors?.password?.message}</span>}
 
         <button className="hover:text-green-700 font-beyekan font-semibold hover:bg-green-300 bg-green-100 text-green-500 rounded-md py-2 px-3 w-1/2 m-auto transition-all duration-300 focus:outline-none focus:ring focus:ring-green-100 focus:ring-offset-1">
           افزودن کاربر جدید

@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { HiArrowRightOnRectangle } from "react-icons/hi2"
+import { HiArrowLeftOnRectangle } from "react-icons/hi2"
 import { logoutUser } from "../../services/apiAuth"
 import { useNavigate } from "react-router-dom"
 
@@ -19,7 +19,7 @@ const Logout = () => {
 
 
     return (
-        <HiArrowRightOnRectangle
+        <HiArrowLeftOnRectangle
             onClick={() => mutate()}
             className="w-8 h-8 cursor-pointer transition-all duration-200 text-red-500 hover:text-red-700"
         />

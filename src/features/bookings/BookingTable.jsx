@@ -54,7 +54,7 @@ const BookingTable = () => {
 
   return (
     <>
-      <div dir="rtl" className="grid grid-cols-[1fr_2fr_1fr_1fr_1fr] w-[90%] text-center font-beyekan font-semibold mt-3 mx-auto bg-slate-300 py-2">
+      <div dir="rtl" className="grid grid-cols-[1fr_2fr_1fr_1fr_1fr] w-[90%] text-blue-950 text-center font-beyekan font-semibold mt-3 mx-auto bg-slate-300 py-2">
         <div>سوئیت</div>
         <div>مهمان</div>
         <div>تعداد شب</div>

@@ -31,7 +31,7 @@ const CabinTable = () => {
 
   return (
     <>
-      <div className="grid grid-cols-6  w-[90%] font-beyekan text-center font-semibold mt-3 mx-auto bg-slate-300 py-2">
+      <div className="grid grid-cols-6 text-blue-950  w-[90%] font-beyekan text-center font-semibold mt-3 mx-auto bg-slate-300 py-2">
         <div>شماره سوییت</div>
         <div>ظرفیت</div>
         <div>قیمت</div>

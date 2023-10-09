@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 
 const LoginForm = () => {
-  const [email, setEmail] = useState("example@gmail.com")
-  const [password, setPassword] = useState("1234")
+  const [email, setEmail] = useState("mostafa.khodaparast1997@gmail.com")
+  const [password, setPassword] = useState("11111111")
   const { login, isLoading } = useLogin()    //useLogin is a custome hook
   const navigate = useNavigate()
 
@@ -17,10 +17,10 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="mt-10">
+    <div className="">
       <header className="flex flex-col items-center">
-        <img src="/logo-light.png" className="  h-40 bg-none object-cover" />
-        <span className=" text-2xl font-bold text-stone-700 pt-8 font-beyekan ">وارد حساب کاربری خود شوید</span>
+        <img src="/logo-light.png" className="mt-10  h-40 bg-none object-cover" />
+        <span className=" text-2xl font-bold text-stone-700 pt-8 font-beyekan dark:text-stone-300 ">وارد حساب کاربری خود شوید</span>
       </header>
 
       <form dir="rtl" onSubmit={handleSubmit} className="w-full mt-1 p-4 flex flex-col font-beyekan font-bold items-center space-y-4">

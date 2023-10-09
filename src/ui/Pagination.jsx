@@ -30,7 +30,7 @@ const Pagination = ({ dataLength }) => {
   //if(pageNumbers <= 1) return null
 
   return (
-    <div className="w-[90%] flex items-center justify-evenly mt-4 mx-auto">
+    <div className="w-[90%] flex items-center justify-evenly dark:text-stone-300 mt-4 mx-auto">
       <div className="flex items-center">
         <button
           onClick={nextPage}

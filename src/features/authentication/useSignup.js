@@ -1,16 +1,20 @@
 import { useMutation } from "@tanstack/react-query"
 import { apiSignUp } from "../../services/apiAuth"
 import { toast } from "react-hot-toast"
+import { useNavigate } from "react-router-dom"
+
 
 export const useSignup = () => {
+
+    const navigate = useNavigate()
 
     const { mutate: signUp, isLoading } = useMutation({
         mutationFn: apiSignUp,
         onSuccess: () => {
-            toast.success('ثبت نام باموفقیت انجام شد')
+            navigate('/dashboard')
         },
-        onError: () => {
-            toast.error("ثبت نام باخطا مواجه شد")
+        onError: (err) => {
+            toast.error(err.message)
         }
     })
 
