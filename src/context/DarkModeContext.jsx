@@ -6,21 +6,14 @@ const DarkModeContext = createContext();
 function DarkModeProvider({ children }) {
   const [isDarkMode, setIsDarkMode] = useState(true)
 
-  // const [isDarkMode, setIsDarkMode] = useLocalStorageState(
-  //   window.matchMedia("(prefers-color-scheme: dark)").matches,
-  //   "isDarkMode"
-  // );
-
   useEffect(() => {
-    if (isDarkMode) {
+    if (isDarkMode)
       document.documentElement.classList.add("dark");
-     // document.documentElement.classList.remove("light-mode");
-    } else {
-      //document.documentElement.classList.add("light-mode");
+    else
       document.documentElement.classList.remove("dark");
-    }
   }, [isDarkMode])
 
+  
   function toggleDarkMode() {
     setIsDarkMode((isDark) => !isDark);
   }

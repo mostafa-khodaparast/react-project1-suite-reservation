@@ -10,6 +10,7 @@ function Cabins() {
 
   return (
     <div dir="rtl" className="flex flex-col items-center text-blue-950">
+        <span className=" font-beyekan font-bold text-3xl self-start pr-10 pb-4 dark:text-stone-300 ">سوئیت ها</span>
       <div className="flex flex-row items-center space-x-28 font-semibold dark:text-stone-300">
         <div className="flex items-center space-x-2 mr-10">
           <span className="font-semibold font-beyekan ml-2">فیلتر براساس تخفیف: </span>

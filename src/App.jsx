@@ -36,7 +36,7 @@ const App = () => {
             <Route element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
               <Route index element={<Navigate to='dashboard' replace />} />
               <Route path="dashboard" element={<Dashboard />} />
-              <Route path="account" element={<Account />} />
+              {/* <Route path="account" element={<Account />} /> */}
               <Route path="bookings" element={<Bookings />} />
               <Route path="bookings/:bookingId" element={<BookingDetail />} />
               <Route path="cabins" element={<Cabins />} />

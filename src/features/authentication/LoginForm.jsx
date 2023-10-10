@@ -23,7 +23,7 @@ const LoginForm = () => {
         <span className=" text-2xl font-bold text-stone-700 pt-8 font-beyekan dark:text-stone-300 ">وارد حساب کاربری خود شوید</span>
       </header>
 
-      <form dir="rtl" onSubmit={handleSubmit} className="w-full mt-1 p-4 flex flex-col font-beyekan font-bold items-center space-y-4">
+      <form dir="rtl" onSubmit={handleSubmit} className="w-[80%] mx-auto mt-1 p-4 flex flex-col font-beyekan font-bold items-center space-y-4">
         <input
           type="email"
           id="email"

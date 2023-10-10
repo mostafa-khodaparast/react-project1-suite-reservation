@@ -1,8 +1,9 @@
 import { NavLink } from "react-router-dom";
 import {
   HiOutlineHome, HiOutlineCalendarDays,
-  HiOutlineHomeModern, HiOutlineUsers, HiOutlineCog6Tooth
+  HiOutlineHomeModern, HiOutlineUsers, HiOutlineCog6Tooth, HiArrowLeftOnRectangle
 } from "react-icons/hi2";
+import Logout from "../features/authentication/Logout";
 
 
 const MainNav = () => {
@@ -39,6 +40,7 @@ const MainNav = () => {
             <span className="pr-2">تنظیمات</span>
           </NavLink>
         </li>
+        <Logout />
       </ul>
     </nav>
   )

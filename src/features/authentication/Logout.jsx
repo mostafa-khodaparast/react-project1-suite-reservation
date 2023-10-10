@@ -19,10 +19,11 @@ const Logout = () => {
 
 
     return (
-        <HiArrowLeftOnRectangle
-            onClick={() => mutate()}
-            className="w-8 h-8 cursor-pointer transition-all duration-200 text-red-500 hover:text-red-700"
-        />
+        <li onClick={() => mutate()} className="flex space-x-2 cursor-pointer hover:bg-[#111827] hover:text-stone-300 hover:dark:bg-[#f9fafb] text-[#6b7280] hover:dark:text-blue-950 rounded-md hover:px-10 py-3 items-center transition-all duration-300">
+            <HiArrowLeftOnRectangle />
+            <span className="pr-2">خروج</span>
+        </li>
+
     )
 }
 
