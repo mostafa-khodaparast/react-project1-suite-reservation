@@ -15,6 +15,7 @@ import PageNotFound from "./pages/PageNotFound"
 import SignupForm from "./pages/SignupForm"
 import AppLayout from "./ui/AppLayout"
 import ProtectedRoute from "./ui/ProjectedRoute"
+import { DarkModeProvider } from "./context/DarkModeContext"
 
 
 const queryClient = new QueryClient({
@@ -27,27 +28,29 @@ const queryClient = new QueryClient({
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools />
-      <BrowserRouter>
-        <Routes>
-          <Route element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
-            <Route index element={<Navigate to='dashboard' replace />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="account" element={<Account />} />
-            <Route path="bookings" element={<Bookings />} />
-            <Route path="bookings/:bookingId" element={<BookingDetail />} />
-            <Route path="cabins" element={<Cabins />} />
-            <Route path="settings" element={<Settings />} />
-            <Route path="users" element={<Users />} />
-          </Route>
-          <Route path="signup" element={<SignupForm />} />
-          <Route path="login" element={<Login />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </BrowserRouter>
-      <Toaster position="top-right" />
-    </QueryClientProvider>
+    <DarkModeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools />
+        <BrowserRouter>
+          <Routes>
+            <Route element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
+              <Route index element={<Navigate to='dashboard' replace />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="account" element={<Account />} />
+              <Route path="bookings" element={<Bookings />} />
+              <Route path="bookings/:bookingId" element={<BookingDetail />} />
+              <Route path="cabins" element={<Cabins />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="users" element={<Users />} />
+            </Route>
+            <Route path="signup" element={<SignupForm />} />
+            <Route path="login" element={<Login />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </BrowserRouter>
+        <Toaster position="top-right" />
+      </QueryClientProvider>
+    </DarkModeProvider>
   )
 }
 
