@@ -11,14 +11,14 @@ export async function getBookings(currentPage) {
   //range method is used for server side pagination in supabase
   if (currentPage) {
     const from = (currentPage - 1) * PAGE_SIZE;
-    const to = from + PAGE_SIZE - 1;
+    const to = from + PAGE_SIZE - 1
     query = query.range(from, to)
   }
 
   const { data, error, count } = await query;
 
   if (error) {
-    throw new Error('دریافت رزروها باخطا مواجه شد')
+    throw new Error(error.message)
   }
 
   return { data, count }
@@ -32,7 +32,7 @@ export async function getBooking(id) {
     .single();
 
   if (error) {
-    throw new Error("رزروف موردنظر یافت نشد");
+    throw new Error(error.message);
   }
 
   return data;
@@ -48,8 +48,7 @@ export async function updateBooking(id, obj) {
     .single();
 
   if (error) {
-    console.error(error);
-    throw new Error("به روزرسانی رزرو باخطا مواجه شد");
+    throw new Error(error.message);
   }
 
   return data;
@@ -60,7 +59,7 @@ export async function deleteBooking(id) {
   const { data, error } = await supabase.from("booking").delete().eq("id", id);
 
   if (error) {
-    throw new Error("حذف رزرو باخطا مواجه شد");
+    throw new Error(error.message);
   }
   return data;
 }

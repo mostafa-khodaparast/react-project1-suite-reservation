@@ -25,7 +25,7 @@ function Dashboard() {
     <>
       <div dir="rtl" className=" font-beyekan font-bold text-2xl mr-10 text-blue-950 dark:text-stone-300 ">داشبورد</div>
       <div className="grid grid-cols-3 gap-4 mt-3 ">
-        <Stat title='میزان فروش' value={totalSales + '000' + 'هزار تومان'} icon={<HiOutlineBanknotes />} color='green' />
+        <Stat title='میزان فروش' value={totalSales + ' تومان'} icon={<HiOutlineBanknotes />} color='green' />
         <Stat title='تعدادشب اقامت' value={totalNights} icon={<HiOutlineCalendarDays />} color='orange' />
         <Stat title='تعداد رزروها' value={numOfBookings} icon={<HiOutlineBriefcase />} color='blue' />
       </div>

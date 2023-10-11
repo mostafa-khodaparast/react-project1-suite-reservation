@@ -1,3 +1,4 @@
+
 const About = () => {
     return (
         <div dir="rtl" className=" w-[80%] mx-auto mt-10 text-blue-950 dark:text-stone-300 font-beyekan">
@@ -9,7 +10,6 @@ const About = () => {
             <div className="mt-2 p-2 font-semibold rounded-lg text-blue-950 bg-stone-300">supabase:   بک اند پروژه برای پیاده سازی جداول</div>
             <div className="mt-2 p-2 font-semibold rounded-lg text-blue-950 bg-stone-300">react-router: برای مسیریابی پروژه</div>
             <div className="mt-2 p-2 font-semibold rounded-lg text-blue-950 bg-stone-300">tailwind: برای استایل دهی پروژه</div>
-
         </div>
     )
 }

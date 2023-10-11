@@ -97,11 +97,6 @@ const BookingDetail = () => {
           <HiOutlineHomeModern />
           <p className=" font-beyekan pr-2">{numNights} شب اقامت در سوئیت شماره : {cabinName}</p>
         </div>
-        {/* <p>
-          {format(new Date(startDate), "EEE, MMM dd yyyy")}
-          {isToday(new Date(startDate)) ? "Today" : formatDistanceFromNow(startDate)}
-          &mdash; {format(new Date(endDate), "EEE, MMM dd yyyy")}
-        </p> */}
       </header>
 
       <div className="flex space-x-3 text-stone-400">
@@ -132,14 +127,10 @@ const BookingDetail = () => {
         <div className="flex items-center">
           <HiOutlineCurrencyDollar />
           <span className="px-2 font-beyekan">مبلغ نهایی: </span>
-          {totalPrice + '000'} هزار تومان
+          {totalPrice }  تومان
         </div>
         <p className=" font-beyekan">{isPaid ? "پرداخت شده" : "پرداخت نشده"}</p>
       </div>
-
-      {/* <p className="text-stone-400 text-sm italic text-right">Booked
-        {format(new Date(created_at), "EEE, MMM dd yyyy, p")}
-      </p> */}
 
       <div className=" w-1/2 mx-auto">
         {status === 'نامشخص' &&

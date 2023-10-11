@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getBookings } from "../../services/apiBookings";
 import SingleBook from "./SingleBook";
 import Spinner from "../../ui/Spinner";
@@ -9,7 +9,7 @@ import Pagination from "../../ui/Pagination";
 const BookingTable = () => {
 
   const [searchParams] = useSearchParams()
-  const queryClient = useQueryClient()
+  
 
   //use this currentPage for server side pagination
   const currentPage = searchParams.get('page') ? Number(searchParams.get('page')) : 1
@@ -20,12 +20,6 @@ const BookingTable = () => {
   } = useQuery({
     queryKey: ['booking', currentPage],
     queryFn: () => getBookings(currentPage)
-  })
-
-  //pre-fetching by react-query for pagination
-  queryClient.prefetchQuery({
-    queryKey: ['booking', currentPage + 1],
-    queryFn: () => getBookings(currentPage + 1)
   })
 
 

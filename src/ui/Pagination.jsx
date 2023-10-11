@@ -27,7 +27,7 @@ const Pagination = ({ dataLength }) => {
 
 
   //no need to pagination if there is one page
-  //if(pageNumbers <= 1) return null
+  if(pageNumbers <= 1) return null
 
   return (
     <div className="w-[90%] flex items-center justify-evenly dark:text-stone-300 mt-4 mx-auto">
