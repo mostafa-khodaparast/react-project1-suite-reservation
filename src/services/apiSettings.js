@@ -4,13 +4,12 @@ export async function getSettings() {
   const { data, error } = await supabase.from("settings").select("*").single();
 
   if (error) {
-    console.error(error);
-    throw new Error("Settings could not be loaded");
+    throw new Error("تنظیمات دریافت نشد");
   }
   return data;
 }
 
-// We expect a newSetting object that looks like {setting: newValue}
+
 export async function updateSetting(newSetting) {
   const { data, error } = await supabase
     .from("settings")
@@ -20,8 +19,8 @@ export async function updateSetting(newSetting) {
     .single();
 
   if (error) {
-    console.error(error);
-    throw new Error("Settings could not be updated");
+    throw new Error("به روزرسانی تنظیمات باخطا مواجه شد");
   }
+
   return data;
 }

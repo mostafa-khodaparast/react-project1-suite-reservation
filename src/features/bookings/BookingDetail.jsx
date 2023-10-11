@@ -5,10 +5,9 @@ import {
 import { useNavigate, useParams, } from "react-router-dom"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { toast } from "react-hot-toast"
-import { format, isToday } from "date-fns"
 import Spinner from "../../ui/Spinner"
 import { getBooking, updateBooking, deleteBooking } from "../../services/apiBookings"
-import { formatCurrency, formatDistanceFromNow } from "../../utils/helpers"
+
 
 
 const BookingDetail = () => {
@@ -62,9 +61,6 @@ const BookingDetail = () => {
   })
 
   const {
-    created_at,
-    startDate,
-    endDate,
     numNights,
     numGuests,
     totalPrice,
@@ -136,7 +132,7 @@ const BookingDetail = () => {
         <div className="flex items-center">
           <HiOutlineCurrencyDollar />
           <span className="px-2 font-beyekan">مبلغ نهایی: </span>
-          {totalPrice} هزار تومان
+          {totalPrice + '000'} هزار تومان
         </div>
         <p className=" font-beyekan">{isPaid ? "پرداخت شده" : "پرداخت نشده"}</p>
       </div>

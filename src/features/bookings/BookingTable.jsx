@@ -4,7 +4,6 @@ import SingleBook from "./SingleBook";
 import Spinner from "../../ui/Spinner";
 import { useSearchParams } from "react-router-dom";
 import Pagination from "../../ui/Pagination";
-import { data } from "autoprefixer";
 
 
 const BookingTable = () => {

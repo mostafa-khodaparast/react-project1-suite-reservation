@@ -5,7 +5,7 @@ export async function getCabins() {
         .from('cabins')
         .select('*')
     if (error) {
-        throw new Error('error occured during fetching cabins... ')
+        throw new Error('دریافت سوئیت ها باخطا مواجه شد')
     }
     return data
 }
@@ -18,7 +18,7 @@ export async function createEditCabins(newCabin, id) {
             .from('cabins')
             .insert([newCabin])
         if (error) {
-            throw new Error('cabin could not be created... ')
+            throw new Error('ایجاد سوئیت جدید باخطا مواجه شد')
         }
         return data
     }
@@ -30,7 +30,7 @@ export async function createEditCabins(newCabin, id) {
             .update({ ...newCabin })
             .eq('id', id)
         if (error) {
-            throw new Error('cabin could not be edited... ')
+            throw new Error('ویرایش سوئیت باخطا مواجه شد ')
         }
         return data
     }
@@ -44,6 +44,6 @@ export async function deleteCabins(id) {
         .delete()
         .eq('id', id)
     if (error) {
-        throw new Error('error occured during deleting cabin... ')
+        throw new Error('حذف سوئیت باخطا مواجه شد')
     }
 }

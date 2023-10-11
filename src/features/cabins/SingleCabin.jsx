@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
-import { deleteCabins } from "../../services/apiCabins"
 import { toast } from "react-hot-toast"
-import CreateCabinForm from "./CreateCabinForm"
 import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi2"
+import { deleteCabins } from "../../services/apiCabins"
+import CreateCabinForm from "./CreateCabinForm"
 
 
 const SingleCabin = ({ cabin }) => {
